@@ -1,8 +1,8 @@
-import Products from "../components/Products"
+import ProductCards from "../components/ProductCards"
 
 const HomePage = () => {
   return (
-    <Products/>
+    <ProductCards/>
   )
 }
 
