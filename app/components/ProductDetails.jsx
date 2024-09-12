@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import "../styles/globals.css"
 
 const ProductDetail = ({ product }) => {
@@ -31,13 +32,53 @@ const ProductDetail = ({ product }) => {
 
   return (
     <div className="container mx-auto py-8">
-      <h1 className="text-2xl font-bold mb-6 text-center">{product.title}</h1>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        <img
-          src={product.images}
-          alt={product.title}
-          className="h-96 w-full object-contain rounded"
-        />
+      {/* Back Button */}
+      <button 
+        onClick={handleBack} 
+        className="text-green-500 font-semibold mb-6 hover:underline"
+      >
+        &larr; Back
+      </button>
+
+      <h1 className="text-3xl font-bold mb-6 text-center">{product.title}</h1>
+
+      {/* Product Details and Images */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+
+        {/* Image Carousel */}
+        <div className="relative">
+          {images.length > 1 ? (
+            <div className="relative">
+              <img
+                src={images[currentImageIndex]}
+                alt={product.title}
+                className="h-96 w-full object-contain rounded"
+              />
+
+              {/* Carousel Controls */}
+              <button
+                onClick={previousImage}
+                className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-gray-800 text-white px-3 py-1 rounded"
+              >
+                &larr;
+              </button>
+              <button
+                onClick={nextImage}
+                className="absolute right-0 top-1/2 transform -translate-y-1/2 bg-gray-800 text-white px-3 py-1 rounded"
+              >
+                &rarr;
+              </button>
+            </div>
+          ) : (
+            images.length === 1 && (
+              <img
+                src={images[0]}
+                alt={product.title}
+                className="h-96 w-full object-contain rounded"
+              />
+            )
+          )}
+        </div>
         <div>
           <p className="text-gray-800 font-bold mt-2">${product.price}</p>
           <p className="text-gray-600 mt-4">{product.description}</p>
