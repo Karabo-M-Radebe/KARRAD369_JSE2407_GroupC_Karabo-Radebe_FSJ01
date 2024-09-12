@@ -92,14 +92,25 @@ const ProductDetail = ({ product }) => {
 
       </div>
          
-          <div>
-            <h1>Reviews</h1>
-            <p>{review.reviewerName}</p>
-            <p>{review.reviewerEmail}</p>
-            <p>{review.comment}</p>
-            <p>{review.rating}/5</p>
-            <p>{review.date}</p>
-          </div>
+      {/* Reviews Section */}
+      <div className="mt-8">
+            <h2 className="text-xl font-semibold mb-4">Reviews</h2>
+            {product.reviews && product.reviews.length > 0 ? (
+            product.reviews.map((review) => (
+                <div key={review.id} className="bg-gray-100 p-4 mb-4 rounded shadow">
+                <p className="font-semibold">{review.reviewerName}</p>
+                <p className="text-sm text-gray-600">{review.reviewerEmail}</p>
+                <p className="mt-2">{review.comment}</p>
+                <p className="text-sm text-gray-600 mt-1">
+                    Rating: {review.rating}/5
+                </p>
+                <p className="text-sm text-gray-400 mt-1">{review.date}</p>
+                </div>
+            ))
+            ) : (
+            <p className="text-gray-500">No reviews available.</p>
+            )}
+      </div>
 
         </div>
   );
