@@ -27,6 +27,9 @@ const ProductDetail = ({ product }) => {
             <h1>Reviews</h1>
             <p>{review.reviewerName}</p>
             <p>{review.reviewerEmail}</p>
+            <p>{review.comment}</p>
+            <p>{review.rating}/5</p>
+            <p>{review.date}</p>
           </div>
 
         </div>
