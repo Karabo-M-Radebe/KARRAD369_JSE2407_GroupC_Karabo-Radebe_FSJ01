@@ -19,6 +19,15 @@ const ProductDetail = ({ product }) => {
         <div>
           <p className="text-gray-800 font-bold mt-2">${product.price}</p>
           <p className="text-gray-600 mt-4">{product.description}</p>
+          <p className="text-gray-700 bg-gray-500 w-20 rounded">{product.category}</p>
+          <p>Tags: {product.tags}</p>
+          <p>Rating: {product.rating}/5</p>
+          <p>{product.stock} In stock | Availability: {product.availabilityStatus}</p>
+          <div>
+            <h1>Reviews</h1>
+            <p>{review.reviewerName}</p>
+            <p>{review.reviewerEmail}</p>
+          </div>
 
         </div>
       </div>
