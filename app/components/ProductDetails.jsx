@@ -37,13 +37,23 @@ const ProductDetail = ({ product }) => {
   return (
     <div className="container mx-auto py-8">
       {/* Back Button */}
+      <div className="ml-10">
       <button 
         onClick={handleBack} 
-        className="text-blue-500 font-semibold mb-6 hover:underline"
+        className="group"
       >
-        &larr; Back
+        <svg 
+            xmlns="http://www.w3.org/2000/svg" height="50" width="50"
+            viewBox="0 0 512 512"
+            className="group-hover:scale-110">
+            <path 
+            fill="#b9d1e4" 
+            d="M48 256a208 208 0 1 1 416 0A208 208 0 1 1 48 256zm464 0A256 256 0 1 0 0 256a256 256 0 1 0 512 0zM256 128l-32 0L96 256 224 384l32 0 0-80 128 0 0-96-128 0 0-80z"
+            />
+        </svg>
       </button>
-
+      </div>
+      
       <h1 className="text-3xl font-bold mb-6 text-center">{product.title}</h1>
 
       {/* Product Details and Images */}
@@ -88,10 +98,10 @@ const ProductDetail = ({ product }) => {
         <div>
           <p className="text-gray-800 font-bold mt-2">${product.price}</p>
           <p className="text-gray-600 mt-4">{product.description}</p>
-          <p className="text-gray-700 bg-gray-500 w-20 rounded px-2 py-1 inline-block"> Category: {product.category} </p>
+          <p className="text-gray-700 mt-4"> Category: {product.category} </p>
           <p className="mt-2">Tags: {product.tags ? product.tags.join(", ") : "N/A"}</p>
           <p className="mt-2">Rating: {product.rating}/5</p>
-          <p className="mt-2"> {product.stock} In stock | Availability: {product.availabilityStatus} </p>
+          <p className="mt-2"> Availability: {product.availabilityStatus} | {product.stock} In stock </p>
         </div>
       </div>
 
@@ -107,7 +117,7 @@ const ProductDetail = ({ product }) => {
               <p className="text-sm text-gray-600 mt-1">
                 Rating: {review.rating}/5
               </p>
-              <p className="text-sm text-gray-400 mt-1">{review.date}</p>
+              <p className="text-sm text-gray-400 mt-1">{new Date(review.date).toLocaleDateString()}</p>
             </div>
           ))
         ) : (
