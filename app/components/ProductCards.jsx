@@ -77,7 +77,7 @@ const ProductCards = ({ initialProducts, currentPage }) => {
   return (
     <div className="container mx-auto py-8">
       <h1 className="text-2xl font-bold mb-6 text-center">Products</h1>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         {products.map((product) => (
           <div key={product.id} className="bg-white shadow-md rounded-lg p-4">
             <img
@@ -87,7 +87,7 @@ const ProductCards = ({ initialProducts, currentPage }) => {
             />
             <h2 className="text-lg font-semibold">{product.title}</h2>
             <p className="text-gray-600">Category: {product.category}</p>
-            <p className="text-gray-800 font-bold mt-2">R{product.price}</p>
+            <p className="text-gray-800 font-bold mt-2">${product.price}</p>
             <a href={`/product/${product.id}`}>
               <button className='bg-gray-800 text-white py-2 px-4 rounded w-full hover:bg-gray-600'>
                 view details
