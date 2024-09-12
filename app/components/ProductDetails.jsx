@@ -1,14 +1,19 @@
 "use client";
 
 import { useState } from "react";
-import "../styles/globals.css"
+import "../styles/globals.css";
 
 const ProductDetail = ({ product }) => {
-    const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   if (!product) {
     return <div className="text-center text-gray-500">Product not found.</div>;
   }
+
+  // Ensure product.images is an array and has at least one image
+  const images = Array.isArray(product.images) && product.images.length > 0
+    ? product.images
+    : [];
 
   // Function to handle the back button
   const handleBack = () => {
@@ -18,24 +23,23 @@ const ProductDetail = ({ product }) => {
   // Move to the next image in the carousel
   const nextImage = () => {
     setCurrentImageIndex((prevIndex) => 
-      (prevIndex + 1) % product.images.length
+      (prevIndex + 1) % images.length
     );
   };
 
   // Move to the previous image in the carousel
   const previousImage = () => {
     setCurrentImageIndex((prevIndex) => 
-      (prevIndex - 1 + product.images.length) % product.images.length
+      (prevIndex - 1 + images.length) % images.length
     );
   };
-
 
   return (
     <div className="container mx-auto py-8">
       {/* Back Button */}
       <button 
         onClick={handleBack} 
-        className="text-green-500 font-semibold mb-6 hover:underline"
+        className="text-blue-500 font-semibold mb-6 hover:underline"
       >
         &larr; Back
       </button>
@@ -84,35 +88,33 @@ const ProductDetail = ({ product }) => {
         <div>
           <p className="text-gray-800 font-bold mt-2">${product.price}</p>
           <p className="text-gray-600 mt-4">{product.description}</p>
-          <p className="text-gray-700 bg-gray-500 w-20 rounded px-2 py-1 inline-block"> Category: {product.category}</p>
+          <p className="text-gray-700 bg-gray-500 w-20 rounded px-2 py-1 inline-block"> Category: {product.category} </p>
           <p className="mt-2">Tags: {product.tags ? product.tags.join(", ") : "N/A"}</p>
           <p className="mt-2">Rating: {product.rating}/5</p>
           <p className="mt-2"> {product.stock} In stock | Availability: {product.availabilityStatus} </p>
         </div>
-
       </div>
-         
+
       {/* Reviews Section */}
       <div className="mt-8">
-            <h2 className="text-xl font-semibold mb-4">Reviews</h2>
-            {product.reviews && product.reviews.length > 0 ? (
-            product.reviews.map((review) => (
-                <div key={review.id} className="bg-gray-100 p-4 mb-4 rounded shadow">
-                <p className="font-semibold">{review.reviewerName}</p>
-                <p className="text-sm text-gray-600">{review.reviewerEmail}</p>
-                <p className="mt-2">{review.comment}</p>
-                <p className="text-sm text-gray-600 mt-1">
-                    Rating: {review.rating}/5
-                </p>
-                <p className="text-sm text-gray-400 mt-1">{review.date}</p>
-                </div>
-            ))
-            ) : (
-            <p className="text-gray-500">No reviews available.</p>
-            )}
+        <h2 className="text-xl font-semibold mb-4">Reviews</h2>
+        {product.reviews && product.reviews.length > 0 ? (
+          product.reviews.map((review) => (
+            <div key={review.id} className="bg-gray-100 p-4 mb-4 rounded shadow">
+              <p className="font-semibold">{review.reviewerName}</p>
+              <p className="text-sm text-gray-600">{review.reviewerEmail}</p>
+              <p className="mt-2">{review.comment}</p>
+              <p className="text-sm text-gray-600 mt-1">
+                Rating: {review.rating}/5
+              </p>
+              <p className="text-sm text-gray-400 mt-1">{review.date}</p>
+            </div>
+          ))
+        ) : (
+          <p className="text-gray-500">No reviews available.</p>
+        )}
       </div>
-
-        </div>
+    </div>
   );
 };
 
