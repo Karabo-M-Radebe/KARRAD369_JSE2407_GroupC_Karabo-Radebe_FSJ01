@@ -3,9 +3,31 @@
 import "../styles/globals.css"
 
 const ProductDetail = ({ product }) => {
+    const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
   if (!product) {
     return <div className="text-center text-gray-500">Product not found.</div>;
   }
+
+  // Function to handle the back button
+  const handleBack = () => {
+    window.history.back();
+  };
+
+  // Move to the next image in the carousel
+  const nextImage = () => {
+    setCurrentImageIndex((prevIndex) => 
+      (prevIndex + 1) % product.images.length
+    );
+  };
+
+  // Move to the previous image in the carousel
+  const previousImage = () => {
+    setCurrentImageIndex((prevIndex) => 
+      (prevIndex - 1 + product.images.length) % product.images.length
+    );
+  };
+
 
   return (
     <div className="container mx-auto py-8">
