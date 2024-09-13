@@ -20,6 +20,7 @@
 import { useState, useEffect } from 'react';
 import { useSearchParams, usePathname } from 'next/navigation';
 import "../styles/globals.css";
+import SkeletonCard from './SkeletonCard';
 
 const ProductCards = ({ initialProducts, currentPage }) => {
   const [products, setProducts] = useState(initialProducts || []);
@@ -66,7 +67,17 @@ const ProductCards = ({ initialProducts, currentPage }) => {
   };
 
   if (loading) {
-    return <div className="text-center text-gray-500">Loading products...</div>;
+    return (
+        <div className="container mx-auto py-8 bg-gray-100">
+        <h1 className="text-2xl font-bold mb-6 text-center">Loading Products...</h1>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          {/* Show Skeleton Loaders while loading */}
+          {Array.from({ length: 8 }).map((_, index) => (
+            <SkeletonCard key={index} />
+          ))}
+        </div>
+      </div>
+);
   }
 
   if (error) {
@@ -82,13 +93,36 @@ const ProductCards = ({ initialProducts, currentPage }) => {
         ))}
       </div>
       <div className="flex justify-center space-x-4 mt-8">
-        <button onClick={handlePreviousPage} disabled={page === 0} className="bg-gray-800 text-white px-4 py-2 rounded hover:bg-gray-600">
-          Previous
-        </button>
-        <span>{page + 1}</span>
-        <button onClick={handleNextPage} className="bg-gray-800 text-white px-4 py-2 rounded hover:bg-gray-600">
-          Next
-        </button>
+        <div>
+            <button onClick={handlePreviousPage} disabled={page === 0} className="group" >
+                <svg 
+                    xmlns="http://www.w3.org/2000/svg" 
+                    height="32" width="32" 
+                    viewBox="0 0 512 512"
+                    className="group-hover:scale-110">
+                    <path 
+                    fill="#b6c1d2" 
+                    d="M512 256A256 256 0 1 0 0 256a256 256 0 1 0 512 0zM271 135c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9l-87 87 87 87c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0L167 273c-9.4-9.4-9.4-24.6 0-33.9L271 135z"/>
+                </svg>
+            </button>
+
+        </div>
+        
+        <p>{page + 1}</p>
+        <div>
+            <button onClick={handleNextPage} className="group">
+                <svg 
+                    xmlns="http://www.w3.org/2000/svg" 
+                    height="32" width="32" 
+                    viewBox="0 0 512 512"
+                    className="group-hover:scale-110">
+                    <path 
+                    fill="#b6c1d2" 
+                    d="M0 256a256 256 0 1 0 512 0A256 256 0 1 0 0 256zM241 377c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l87-87-87-87c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0L345 239c9.4 9.4 9.4 24.6 0 33.9L241 377z"/>
+                </svg>
+            </button>
+        </div>
+        
       </div>
     </div>
   );
