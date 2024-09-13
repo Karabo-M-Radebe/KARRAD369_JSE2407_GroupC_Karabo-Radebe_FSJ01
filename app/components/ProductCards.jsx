@@ -81,7 +81,7 @@ const ProductCards = ({ initialProducts, currentPage }) => {
   }
 
   if (error) {
-    return <div className="text-center text-red-500">Error: {error}</div>;
+    return <div className="my-36 text-center text-3xl text-red-500">Oops, there seems to be an error buddy! {error}</div>;
   }
 
   return (
