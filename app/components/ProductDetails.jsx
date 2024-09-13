@@ -2,18 +2,12 @@
 
 import { useState } from "react";
 import "../styles/globals.css";
-import SkeletonDetail from "./SkeletonDetail";
 
 const ProductDetail = ({ product }) => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const [loading, setLoading] = useState(false);
 
   if (!product) {
     return <div className="text-center text-gray-500">Product not found.</div>;
-  }
-
-  if (loading) {
-    return <SkeletonDetail />;
   }
 
   // Ensure product.images is an array and has at least one image
