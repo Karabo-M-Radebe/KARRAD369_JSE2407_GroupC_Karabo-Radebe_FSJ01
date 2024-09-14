@@ -22,6 +22,14 @@ import { useSearchParams, usePathname } from 'next/navigation';
 import "../styles/globals.css";
 import SkeletonCard from './SkeletonCard';
 
+/**
+ * ProductCards component
+ * 
+ * @param {object} initialProducts - Initial products data
+ * @param {number} currentPage - Current page number
+ * 
+ * @returns {JSX.Element} - ProductCards component
+ */
 const ProductCards = ({ initialProducts, currentPage }) => {
   const [products, setProducts] = useState(initialProducts || []);
   const [loading, setLoading] = useState(false);
@@ -32,6 +40,12 @@ const ProductCards = ({ initialProducts, currentPage }) => {
   const page = parseInt(pageParam) - 1;
 
   useEffect(() => {
+    /**
+   * Fetch products data
+   * 
+   * @async
+   * @returns {Promise<void>}
+   */
     const fetchProducts = async () => {
       setLoading(true);
       setError(null);
@@ -54,11 +68,21 @@ const ProductCards = ({ initialProducts, currentPage }) => {
     fetchProducts();
   }, [page]);
 
+  /**
+   * Handle next page click
+   * 
+   * @returns {void}
+   */
   const handleNextPage = () => {
     const nextPage = page + 2;
     window.history.pushState({}, '', `${pathname}?page=${nextPage}`);
   };
 
+  /**
+   * Handle previous page click
+   * 
+   * @returns {void}
+   */
   const handlePreviousPage = () => {
     if (page > 0) {
       const prevPage = page;
@@ -128,9 +152,23 @@ const ProductCards = ({ initialProducts, currentPage }) => {
   );
 };
 
+/**
+ * ProductCard component
+ * 
+ * @param {object} product - Product data
+ * 
+ * @returns {JSX.Element} - ProductCard component
+ */
 const ProductCard = ({ product }) => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
+  /**
+   * Update current image index
+   * 
+   * @param {number} prevIndex - Previous image index
+   * 
+   * @returns {number} - New image index
+   */
   useEffect(() => {
     if (product.images.length > 1) {
       const interval = setInterval(() => {
@@ -167,6 +205,14 @@ const ProductCard = ({ product }) => {
   );
 };
 
+/**
+ * Get server-side props
+ * 
+ * @async
+ * @param {object} context - Context object
+ * 
+ * @returns {Promise<object>} - Server-side props
+ */
 // Server-side rendering (SSR) to fetch products for the initial page load
 export async function getServerSideProps(context) {
   const page = parseInt(context.query.page) || 1;

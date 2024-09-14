@@ -3,6 +3,13 @@
 import { useState } from "react";
 import "../styles/globals.css";
 
+/**
+ * ProductDetail component
+ * 
+ * @param {object} product - Product data
+ * 
+ * @returns {JSX.Element} - ProductDetail component
+ */
 const ProductDetail = ({ product }) => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
@@ -15,19 +22,31 @@ const ProductDetail = ({ product }) => {
     ? product.images
     : [];
 
-  // Function to handle the back button
+  /**
+   * Handle back button click
+   * 
+   * @returns {void}
+   */
   const handleBack = () => {
     window.history.back();
   };
 
-  // Move to the next image in the carousel
+  /**
+   * Move to the next image in the carousel
+   * 
+   * @returns {void}
+   */
   const nextImage = () => {
     setCurrentImageIndex((prevIndex) => 
       (prevIndex + 1) % images.length
     );
   };
 
-  // Move to the previous image in the carousel
+  /**
+   * Move to the previous image in the carousel
+   * 
+   * @returns {void}
+   */
   const previousImage = () => {
     setCurrentImageIndex((prevIndex) => 
       (prevIndex - 1 + images.length) % images.length
@@ -128,7 +147,14 @@ const ProductDetail = ({ product }) => {
   );
 };
 
-// Server-side rendering (SSR) to fetch individual product data
+/**
+ * Get server-side props
+ * 
+ * @async
+ * @param {object} context - Context object
+ * 
+ * @returns {Promise<object>} - Server-side props
+ */
 export async function getServerSideProps(context) {
   const { id } = context.params;
 

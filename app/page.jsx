@@ -29,8 +29,8 @@ export default function Page() {
           {/* Category 1 */}
           <div className="bg-white shadow-lg rounded-lg p-6 text-center">
             <Image
-              src="/images/fruits.jpg"
-              alt="Fresh Fruits"
+              src=""
+              alt="Home-accessories"
               width={300}
               height={200}
               className="rounded mb-4"
@@ -47,8 +47,8 @@ export default function Page() {
           {/* Category 2 */}
           <div className="bg-white shadow-lg rounded-lg p-6 text-center">
             <Image
-              src="/images/vegetables.jpg"
-              alt="Fresh Vegetables"
+              src=""
+              alt="Groceries"
               width={300}
               height={200}
               className="rounded mb-4"
@@ -65,8 +65,8 @@ export default function Page() {
           {/* Category 3 */}
           <div className="bg-white shadow-lg rounded-lg p-6 text-center">
             <Image
-              src="/images/snacks.jpg"
-              alt="Snacks"
+              src=""
+              alt="Beauty"
               width={300}
               height={200}
               className="rounded mb-4"
